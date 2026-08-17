@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selbstcheck Berufsorientierung</title>
+<style>
+  :root{
+    --accent:#2b5d6b;
+    --accent-dark:#1c4049;
+    --bg:#faf9f6;
+    --card:#ffffff;
+    --text:#1d1d1d;
+    --muted:#666666;
+    --border:#dcd8cf;
+    --warn-bg:#fff4e5;
+    --warn-border:#e0a94a;
+    --danger-bg:#fdecec;
+    --danger-border:#c0392b;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    font-size:18px;
+  }
+  #app{
+    max-width:720px;
+    margin:0 auto;
+    padding:28px 20px 80px 20px;
+  }
+  h1{font-size:1.7em;margin-bottom:0.3em;}
+  h2{font-size:1.3em;margin-top:0;color:var(--accent-dark);}
+  h3{font-size:1.1em;margin-bottom:0.3em;}
+  p{margin:0.8em 0;}
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:24px;
+    margin-bottom:20px;
+  }
+  .muted{color:var(--muted);font-size:0.95em;}
+  .progress-text{font-size:0.95em;color:var(--muted);margin-bottom:6px;}
+  .progress-bar-track{
+    width:100%;height:6px;background:#eee;border-radius:3px;overflow:hidden;margin-bottom:22px;
+  }
+  .progress-bar-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .2s;}
+  textarea{
+    width:100%;
+    min-height:160px;
+    font-family:inherit;
+    font-size:1em;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    resize:vertical;
+    background:#fffef9;
+  }
+  textarea:focus{outline:2px solid var(--accent);border-color:var(--accent);}
+  input[type=text], select{
+    width:100%;
+    font-family:inherit;
+    font-size:1em;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    margin-bottom:16px;
+    background:#fffef9;
+  }
+  label{display:block;font-weight:600;margin-bottom:6px;margin-top:14px;}
+  .hint{
+    margin-top:8px;
+    font-size:0.9em;
+    color:#8a6d1f;
+    background:var(--warn-bg);
+    border:1px solid var(--warn-border);
+    padding:8px 12px;
+    border-radius:6px;
+  }
+  .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;}
+  button{
+    font-family:inherit;
+    font-size:1em;
+    padding:12px 22px;
+    border-radius:8px;
+    border:1px solid var(--accent);
+    background:var(--accent);
+    color:#fff;
+    cursor:pointer;
+  }
+  button.secondary{
+    background:transparent;
+    color:var(--accent-dark);
+    border:1px solid var(--border);
+  }
+  button.ghost{
+    background:transparent;
+    color:var(--muted);
+    border:none;
+    text-decoration:underline;
+    padding:12px 6px;
+  }
+  button:hover{opacity:0.92;}
+  button:disabled{opacity:0.5;cursor:not-allowed;}
+  .safety-box{
+    background:var(--danger-bg);
+    border:1px solid var(--danger-border);
+    border-radius:10px;
+    padding:20px;
+    margin-bottom:24px;
+  }
+  .safety-box h3{margin-top:0;color:var(--danger-border);}
+  .obs{
+    border-left:4px solid var(--accent);
+    padding:10px 16px;
+    margin-bottom:16px;
+    background:#f5f7f6;
+    border-radius:0 8px 8px 0;
+  }
+  .obs .conf{font-size:0.85em;color:var(--muted);font-style:italic;}
+  .quote{font-style:italic;color:var(--accent-dark);}
+  .direction{
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:16px;
+    margin-bottom:14px;
+  }
+  .direction h4{margin:0 0 6px 0;}
+  footer.top-note{font-size:0.85em;color:var(--muted);text-align:center;margin-top:10px;}
+  ul{padding-left:1.3em;}
+  li{margin-bottom:0.6em;}
+  .file-input-label{
+    display:inline-block;
+    padding:12px 22px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--accent-dark);
+    cursor:pointer;
+  }
+  .file-input-label input{display:none;}
+  @media print{
+    .no-print{display:none !important;}
+    body{font-size:14px;background:#fff;}
+    .card{border:none;padding:0;margin-bottom:14px;}
+    #app{max-width:100%;padding:0 12px;}
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<noscript>
+  <div style="max-width:600px;margin:60px auto;padding:24px;font-family:sans-serif;line-height:1.5;">
+    <h1>JavaScript ist ausgeschaltet</h1>
+    <p>Diese Seite braucht JavaScript, um die Fragen und die Auswertung anzuzeigen.</p>
+    <p>Falls du das auf dem Handy in einer Vorschau (z. B. aus Mail, WhatsApp oder der Dateien-App) geöffnet hast: Datei antippen und halten &rarr; "Teilen" &rarr; Safari (oder Chrome) auswählen, damit sie als echte Webseite geöffnet wird.</p>
+  </div>
+</noscript>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   DATEN: Fragen, Rahmen-Felder, Auswertungsregeln
+   ============================================================ */
+
+// 6 Abschnitte a 4 Fragen. Reihenfolge = Reihenfolge in der App.
+// feeling: true markiert Fragen, die nach dem Gefuehl im Moment fragen
+// (Vorgabe: mindestens 4 solcher Fragen im gesamten Fragebogen).
+var SECTIONS = [
+  {
+    heading: "Gute und schlechte Tage",
+    questions: [
+      { text: "Erzähl von einem Tag in letzter Zeit, der richtig gut war. Was ist passiert, und was genau hat den Tag gut gemacht?", feeling:false },
+      { text: "Erzähl von einem Tag, an dem du abends total leer und genervt warst. Was war da los?", feeling:false },
+      { text: "Wobei vergisst du komplett die Zeit? Erzähl von einer Situation, in der dir das zuletzt passiert ist.", feeling:false },
+      { text: "Was ist dir in dem Moment durch den Kopf gegangen, als du das letzte Mal richtig in einer Sache drin warst?", feeling:true }
+    ]
+  },
+  {
+    heading: "Was du freiwillig machst",
+    questions: [
+      { text: "Was tust du, ohne dass es jemand von dir verlangt – ohne Note, ohne dass es jemand mitkriegt? Erzähl von einer konkreten Situation.", feeling:false },
+      { text: "Erzähl von etwas, das du noch einmal probiert hast, obwohl es beim ersten Mal danebengegangen ist. Was hat dich dazu gebracht, es noch einmal zu versuchen?", feeling:false },
+      { text: "Was hast du dir zuletzt selbst beigebracht, ohne dass es jemand von dir wollte? Wie bist du dabei vorgegangen?", feeling:false },
+      { text: "Was ist dir in dem Moment durch den Kopf gegangen, als du zuletzt an so einer eigenen Sache gearbeitet hast?", feeling:true }
+    ]
+  },
+  {
+    heading: "Mit anderen",
+    questions: [
+      { text: "Erzähl von einer Sache, die du zusammen mit anderen gemacht hast. Was war dein Anteil daran?", feeling:false },
+      { text: "Wann hast du mal etwas übernommen, wofür du eigentlich nicht zuständig warst? Was ist passiert?", feeling:false },
+      { text: "Was nervt dich daran, mit anderen zusammen etwas zu machen? Erzähl von einer konkreten Situation, in der dich das gestört hat.", feeling:false },
+      { text: "Erzähl von einem Moment in einer Gruppe, in dem du dich richtig wohlgefühlt hast. Was war da anders als sonst?", feeling:false }
+    ]
+  },
+  {
+    heading: "Anstrengung, Erfolg und Misserfolg",
+    questions: [
+      { text: "Worauf bist du stolz? Erzähl die Situation und sag genau, warum dich das stolz macht.", feeling:false },
+      { text: "Erzähl von etwas, das mal richtig schiefgegangen ist. Was hast du dir danach gesagt?", feeling:false },
+      { text: "Was ist dir in dem Moment durch den Kopf gegangen, als dir klar wurde, dass etwas schiefläuft?", feeling:true },
+      { text: "Erzähl von etwas, wofür du richtig hart gearbeitet hast. Hat sich das gelohnt, und woran machst du das fest?", feeling:false }
+    ]
+  },
+  {
+    heading: "Alltag, Schule, Arbeit",
+    questions: [
+      { text: "Welcher Teil deiner Woche geht dir leicht von der Hand? Erzähl, wie das konkret aussieht.", feeling:false },
+      { text: "Welcher Teil deiner Woche zieht sich richtig? Was genau macht das so anstrengend?", feeling:false },
+      { text: "Erzähl von einer Arbeit, einem Job oder einem Praktikum, das du schon gemacht hast. Wie war das?", feeling:false },
+      { text: "Erzähl von einer Situation, in der du etwas gemacht hast, ohne zu verstehen, warum du das tust. Hat dich das gestört?", feeling:false }
+    ]
+  },
+  {
+    heading: "Wie es weitergehen soll",
+    questions: [
+      { text: "Was antwortest du gerade, wenn dich jemand nach deinem Berufswunsch fragt? Und wie sicher bist du dir dabei wirklich?", feeling:false },
+      { text: "Was soll auf keinen Fall passieren, wenn du in ein paar Jahren auf deine Arbeit schaust?", feeling:false },
+      { text: "Wie soll ein ganz normaler Arbeitstag in fünf Jahren für dich aussehen? Erzähl ihn wie eine Szene, von morgens bis abends.", feeling:false },
+      { text: "Was ist dir in dem Moment durch den Kopf gegangen, als du das letzte Mal wirklich über deine Zukunft nachgedacht hast?", feeling:true }
+    ]
+  }
+];
+
+// Flache Liste aller 24 Fragen mit Abschnittsindex (0-5)
+var QUESTIONS = [];
+SECTIONS.forEach(function(sec, si){
+  sec.questions.forEach(function(q){
+    QUESTIONS.push({ text:q.text, feeling:q.feeling, section:si });
+  });
+});
+var TOTAL_Q = QUESTIONS.length; // 24
+
+var THIN_LIMIT = 120; // Zeichen, unter denen ein Hinweis erscheint
+
+/* ============================================================
+   ZUSTAND (nur im Arbeitsspeicher)
+   ============================================================ */
+
+var state = {
+  screen: "start", // start | question | rahmen | selfcheck | evaluation
+  qIndex: 0,
+  answers: new Array(TOTAL_Q).fill(""),
+  rahmen: {
+    ort: "",
+    fahrweg: "",
+    verkehrsmittel: "",
+    abschluss: "",
+    entscheidungszeit: "",
+    einschraenkung: ""
+  },
+  selfCheckPrompt: [],   // welche Fragen-Indizes gezeigt wurden
+  selfCheckAnswer: ""
+};
+
+function resetAll(){
+  state = {
+    screen: "start",
+    qIndex: 0,
+    answers: new Array(TOTAL_Q).fill(""),
+    rahmen: { ort:"", fahrweg:"", verkehrsmittel:"", abschluss:"", entscheidungszeit:"", einschraenkung:"" },
+    selfCheckPrompt: [],
+    selfCheckAnswer: ""
+  };
+  render();
+}
+
+/* ============================================================
+   HILFSFUNKTIONEN
+   ============================================================ */
+
+function esc(s){
+  var d = document.createElement("div");
+  d.innerText = s || "";
+  return d.innerHTML;
+}
+
+function countSkipped(){
+  var n = 0;
+  state.answers.forEach(function(a){ if(!a || a.trim().length===0) n++; });
+  return n;
+}
+function countThin(){
+  var n = 0;
+  state.answers.forEach(function(a){
+    var t = (a||"").trim();
+    if(t.length>0 && t.length<THIN_LIMIT) n++;
+  });
+  return n;
+}
+
+/* ============================================================
+   SICHERHEITSREGEL
+   Stichwortliste fuer Hinweise auf ernste Belastung.
+   Bei Treffer: keine inhaltliche Auswertung dieser Antwort,
+   stattdessen sichtbarer, ruhiger Hinweis mit Hilfsnummern.
+   Liste bewusst vorsichtig gehalten (lieber ein Treffer zu viel
+   als einer zu wenig) - kann hier erweitert werden.
+   ============================================================ */
+var SAFETY_KEYWORDS = [
+  "erschöpft","ausgebrannt","hoffnungslos","keine hoffnung","keinen sinn mehr",
+  "will nicht mehr","nicht mehr leben","mir wehtun","mir etwas antun","ritz",
+  "verletze mich","selbstverletz","schneide mich","schlägt mich","werde geschlagen",
+  "geschlagen worden","gewalt zuhause","gewalt zu hause","angst vor meinem vater",
+  "angst vor meiner mutter","angst zu hause","angst zuhause","missbraucht",
+  "missbrauch","niemand würde es merken","bringe mich um","suizid"
+];
+
+function detectSafetyFlag(){
+  var all = state.answers.join(" \n ").toLowerCase();
+  return SAFETY_KEYWORDS.some(function(k){ return all.indexOf(k) !== -1; });
+}
+
+/* ============================================================
+   AUSWERTUNGSREGELN
+   Alles hier ist Stichwort-basiert (kein KI-Aufruf).
+   Kommentare markieren die Stellen, an denen sich die Regeln
+   spaeter anpassen lassen.
+   ============================================================ */
+
+// Drei Grundmotive, nie beim Namen genannt, nur intern als Schluessel.
+var THEMES = {
+  steigern: {
+    keywords: ["besser werden","weiterkommen","perfekt","verbessert","geübt","trainiert",
+      "ziel erreicht","geschafft","durchgezogen","nicht aufgegeben","schaffen",
+      "eigenen anspruch","höher","schneller als","mehr erreichen","rekord","bestanden",
+      "erfolgreich","stolz","angestrengt","alles gegeben","besser als vorher",
+      "weiterentwickelt","gewachsen","dazugelernt","übung gemacht","noch mal versucht"]
+  },
+  wirkung: {
+    keywords: ["gebaut","erschaffen","entworfen","geplant","organisiert","aufgebaut",
+      "eigene idee","umgesetzt","gestaltet","entwickelt","erstellt","designt",
+      "verändert","beeindruckt","überzeugt","gezeigt","präsentiert","inspiriert",
+      "sichtbares ergebnis","fertig geworden","gegründet","selbst entschieden wie"]
+  },
+  zusammensein: {
+    keywords: ["zusammen","gemeinsam","freunde","familie","team","gruppe","füreinander",
+      "zusammenhalt","dazugehören","unterstützt","geholfen","zugehört","gespräch",
+      "gelacht","verbunden","mit anderen","kumpel","clique","aufeinander verlassen"]
+  }
+};
+
+// Bewegung hin zu etwas vs. weg von etwas
+var HIN_KEYWORDS = ["will ich","möchte ich","wünsche mir","lust auf","hoffe","freue mich auf",
+  "ziel ist","träume von","vorstellen kann ich mir","will unbedingt"];
+var WEG_KEYWORDS = ["bloß nicht","auf keinen fall","vermeiden","nie wieder","angst davor",
+  "nicht noch mal","kann ich nicht ausstehen","graut mir vor","hasse es wenn"];
+
+// Leerlauf vs. Belastung
+var LEERLAUF_KEYWORDS = ["langweilig","langeweile","nichts zu tun","leerlauf","gewartet",
+  "eintönig","stumpf","öde","ausgebremst","warten müssen"];
+var BELASTUNG_KEYWORDS = ["stress","druck","überfordert","zu viel auf einmal","erschöpft",
+  "gehetzt","keine zeit","kaputt danach","fertig mit den nerven","angespannt"];
+
+// "nur ausgefuehrt, ohne zu verstehen warum" - bezieht sich vor allem auf
+// die Frage in Abschnitt 5 (Index 19, 0-basiert), kann aber ueberall auftauchen.
+var UNVERSTANDEN_KEYWORDS = ["keine ahnung warum","wusste nicht wieso","hat mich gestört",
+  "sinnlos","hat mich genervt","wozu das","keinen sinn ergeben","ohne grund",
+  "einfach gemacht ohne zu fragen"];
+
+function textIncludesAny(text, list){
+  var lower = text.toLowerCase();
+  return list.some(function(k){ return lower.indexOf(k) !== -1; });
+}
+
+// Fuer ein Thema: in wie vielen der 6 Abschnitte kommt mindestens ein
+// Stichwort vor, und was ist das laengste (= aussagekraeftigste) Zitat.
+function analyzeTheme(themeKeywords){
+  var sectionsHit = {};
+  var bestQuote = null, bestLen = 0, bestQIndex = -1;
+  QUESTIONS.forEach(function(q, i){
+    var a = state.answers[i];
+    if(!a || a.trim().length===0) return;
+    if(textIncludesAny(a, themeKeywords)){
+      sectionsHit[q.section] = true;
+      if(a.trim().length > bestLen){
+        bestLen = a.trim().length;
+        bestQuote = a.trim();
+        bestQIndex = i;
+      }
+    }
+  });
+  var sectionCount = Object.keys(sectionsHit).length;
+  return { sectionCount: sectionCount, quote: bestQuote, qIndex: bestQIndex };
+}
+
+// Regel: >=3 Abschnitte -> "mehrfach", ==2 -> "koennte hinkommen",
+// <2 -> immer nur "Vermutung" (so vorgegeben, nicht veraenderbar).
+function confidenceLabel(sectionCount){
+  if(sectionCount >= 3) return "Das kam bei dir mehrfach vor.";
+  if(sectionCount === 2) return "Das könnte hinkommen.";
+  return "Das ist nur eine Vermutung.";
+}
+
+// kuerzt ein Zitat auf ~160 Zeichen fuer die Anzeige
+function shortQuote(q){
+  if(!q) return "";
+  if(q.length <= 220) return q;
+  return q.slice(0,217).trim() + "...";
+}
+
+function buildObservations(){
+  var obs = [];
+
+  // --- 1) Die drei Grundmotive ---
+  var themeResults = {};
+  Object.keys(THEMES).forEach(function(key){
+    themeResults[key] = analyzeTheme(THEMES[key].keywords);
+  });
+
+  var THEME_TEXT = {
+    steigern: "Mehrere deiner Antworten drehen sich darum, dich selbst zu steigern und eigene Ansprüche zu erfüllen.",
+    wirkung: "Mehrere deiner Antworten drehen sich darum, etwas zu gestalten und zu sehen, dass durch dich etwas entsteht oder sich verändert.",
+    zusammensein: "Mehrere deiner Antworten drehen sich darum, mit anderen zusammen zu sein und dazuzugehören."
+  };
+
+  Object.keys(themeResults).forEach(function(key){
+    var r = themeResults[key];
+    if(r.sectionCount >= 1 && r.quote){
+      obs.push({
+        text: THEME_TEXT[key],
+        quote: shortQuote(r.quote),
+        qIndex: r.qIndex,
+        confidence: confidenceLabel(r.sectionCount),
+        theme: key,
+        strength: r.sectionCount
+      });
+    }
+    // Kein Zitat gefunden -> Beobachtung entfaellt ersatzlos (keine Regel noetig, einfach nicht pushen).
+  });
+
+  // --- 2) Hin-zu vs. weg-von ---
+  var hinCount = 0, wegCount = 0, hinQuote=null, wegQuote=null, hinIdx=-1, wegIdx=-1;
+  QUESTIONS.forEach(function(q,i){
+    var a = state.answers[i];
+    if(!a || a.trim().length===0) return;
+    if(textIncludesAny(a, HIN_KEYWORDS)){ hinCount++; if(!hinQuote || a.length>hinQuote.length){hinQuote=a.trim();hinIdx=i;} }
+    if(textIncludesAny(a, WEG_KEYWORDS)){ wegCount++; if(!wegQuote || a.length>wegQuote.length){wegQuote=a.trim();wegIdx=i;} }
+  });
+  if(hinCount>0 && hinCount >= wegCount && hinQuote){
+    obs.push({
+      text: "In dem, was du schreibst, bewegst du dich eher auf etwas zu, das du willst, als dass du vor allem etwas vermeiden willst.",
+      quote: shortQuote(hinQuote), qIndex: hinIdx,
+      confidence: confidenceLabel(hinCount>=3?3:hinCount), theme:"richtung"
+    });
+  } else if(wegCount>0 && wegQuote){
+    obs.push({
+      text: "In dem, was du schreibst, geht es öfter darum, dass etwas Bestimmtes nicht passieren soll, als darum, worauf du zusteuerst.",
+      quote: shortQuote(wegQuote), qIndex: wegIdx,
+      confidence: confidenceLabel(wegCount>=3?3:wegCount), theme:"richtung"
+    });
+  }
+
+  // --- 3) Leerlauf vs. Belastung ---
+  var leerCount=0, belCount=0, leerQuote=null, belQuote=null, leerIdx=-1, belIdx=-1;
+  QUESTIONS.forEach(function(q,i){
+    var a = state.answers[i];
+    if(!a || a.trim().length===0) return;
+    if(textIncludesAny(a, LEERLAUF_KEYWORDS)){ leerCount++; if(!leerQuote||a.length>leerQuote.length){leerQuote=a.trim();leerIdx=i;} }
+    if(textIncludesAny(a, BELASTUNG_KEYWORDS)){ belCount++; if(!belQuote||a.length>belQuote.length){belQuote=a.trim();belIdx=i;} }
+  });
+  if(leerCount>0 && leerCount>=belCount && leerQuote){
+    obs.push({
+      text: "Leerlauf, bei dem nichts passiert, scheint dich mehr zu stören als Situationen mit viel Druck.",
+      quote: shortQuote(leerQuote), qIndex: leerIdx,
+      confidence: confidenceLabel(leerCount>=3?3:leerCount), theme:"leerlauf"
+    });
+  } else if(belCount>0 && belQuote){
+    obs.push({
+      text: "Zu viel Druck und Belastung scheinen dich mehr zu stören als Situationen, in denen wenig passiert.",
+      quote: shortQuote(belQuote), qIndex: belIdx,
+      confidence: confidenceLabel(belCount>=3?3:belCount), theme:"belastung"
+    });
+  }
+
+  // --- 4) Ausgefuehrt ohne zu verstehen (v.a. Frage Index 19) ---
+  var idxUnverstanden = 19;
+  var aUnverstanden = state.answers[idxUnverstanden];
+  if(aUnverstanden && aUnverstanden.trim().length>0 && textIncludesAny(aUnverstanden, UNVERSTANDEN_KEYWORDS)){
+    obs.push({
+      text: "Es scheint dich zu stören, wenn du etwas tun sollst, ohne zu verstehen, warum.",
+      quote: shortQuote(aUnverstanden.trim()), qIndex: idxUnverstanden,
+      confidence: "Das ist nur eine Vermutung.", theme:"verstehen"
+    });
+  }
+
+  // --- 5) Wichtigste Beobachtung: Ziel (Abschnitt 6) vs. Abschnitt 1-5 ---
+  // Dominantes Thema in Abschnitt 6 (Fragen 20-23) vs. dominantes Thema in
+  // Abschnitt 1-5 (Fragen 0-19) vergleichen. Bei Abweichung: das ist die
+  // wichtigste Information, so wie im Prompt gefordert - neutral formuliert,
+  // kein Vorwurf.
+  var mismatch = null;
+  (function(){
+    var earlyCounts = {steigern:0,wirkung:0,zusammensein:0};
+    var lateCounts = {steigern:0,wirkung:0,zusammensein:0};
+    var earlyQuotes = {steigern:null,wirkung:null,zusammensein:null};
+    var lateQuotes = {steigern:null,wirkung:null,zusammensein:null};
+    QUESTIONS.forEach(function(q,i){
+      var a = state.answers[i];
+      if(!a || a.trim().length===0) return;
+      Object.keys(THEMES).forEach(function(key){
+        if(textIncludesAny(a, THEMES[key].keywords)){
+          if(q.section <= 4){
+            earlyCounts[key]++;
+            if(!earlyQuotes[key] || a.length>earlyQuotes[key].length) earlyQuotes[key]=a.trim();
+          } else {
+            lateCounts[key]++;
+            if(!lateQuotes[key] || a.length>lateQuotes[key].length) lateQuotes[key]=a.trim();
+          }
+        }
+      });
+    });
+    function topKey(counts){
+      var best=null, bestV=0;
+      Object.keys(counts).forEach(function(k){ if(counts[k]>bestV){bestV=counts[k];best=k;} });
+      return bestV>0?best:null;
+    }
+    var earlyTop = topKey(earlyCounts);
+    var lateTop = topKey(lateCounts);
+    if(earlyTop && lateTop && earlyTop !== lateTop && earlyQuotes[earlyTop]){
+      mismatch = {
+        earlyTop: earlyTop, lateTop: lateTop,
+        earlyQuote: shortQuote(earlyQuotes[earlyTop]),
+        lateQuote: lateQuotes[lateTop] ? shortQuote(lateQuotes[lateTop]) : null
+      };
+    }
+  })();
+
+  return { observations: obs, themeResults: themeResults, mismatch: mismatch };
+}
+
+/* ============================================================
+   RICHTUNGEN ZUM ANGUCKEN
+   Bewusst als Bereiche/Felder formuliert, nicht als Einzelberuf,
+   und ohne erfundene Zahlen zu Gehalt oder Ausbildungsplaetzen.
+   ============================================================ */
+var DIRECTIONS = [
+  { id:"handwerk_kunde", name:"Ausbildung im Handwerk mit Kundenkontakt (z. B. Bau, Technik, Reparatur)",
+    themes:["wirkung","steigern"],
+    passt:"weil du gern etwas mit den Händen zu einem sichtbaren Ergebnis bringst und dabei besser werden willst",
+    nervig:"Kundentermine, Zeitdruck und dass nicht jeder Auftrag nach Plan läuft",
+    nichtKlar:"Leute, die lieber am Schreibtisch planen als draußen anzupacken" },
+  { id:"kreativ_gestaltung", name:"Bereich, in dem du selbst etwas gestaltest und entwickelst (z. B. Medien, Design, Eventplanung, eigenes Projekt)",
+    themes:["wirkung"],
+    passt:"weil dir wichtig ist, dass am Ende etwas entsteht, das von dir kommt",
+    nervig:"wenn andere reinreden oder du lange auf Feedback warten musst",
+    nichtKlar:"Leute, die lieber nach festen Vorgaben arbeiten als selbst Ideen zu entwickeln" },
+  { id:"soziale_arbeit", name:"Arbeit mit und für Menschen im Team (z. B. Erziehung, Pflege, Beratung, Gastronomie mit Stammkundschaft)",
+    themes:["zusammensein"],
+    passt:"weil dir wichtig ist, wer um dich herum ist und dass ihr euch aufeinander verlassen könnt",
+    nervig:"wenn Leute in der Gruppe nicht an einem Strang ziehen oder es viel Wechsel gibt",
+    nichtKlar:"Leute, die lieber für sich allein arbeiten" },
+  { id:"leistung_ziel", name:"Bereich mit klaren Zielen und Leistungsvergleich (z. B. technische Ausbildung mit Prüfungen, Vertrieb)",
+    themes:["steigern"],
+    passt:"weil dich anspornt, dich zu messen und besser zu werden",
+    nervig:"Durchhänger, in denen sich kein Fortschritt zeigt",
+    nichtKlar:"Leute, die es unangenehm finden, verglichen zu werden" },
+  { id:"eigenverantwortung", name:"Tätigkeit mit viel Eigenverantwortung, z. B. ein eigener Bereich in einem Betrieb",
+    themes:["steigern","wirkung"],
+    passt:"weil du gern selbst entscheidest, wie du an eine Sache herangehst",
+    nervig:"dass dir niemand sagt, ob du auf dem richtigen Weg bist",
+    nichtKlar:"Leute, die klare Ansagen brauchen, um loszulegen" },
+  { id:"pflege_gesundheit", name:"Ausbildung im Gesundheits- oder Pflegebereich",
+    themes:["zusammensein","steigern"],
+    passt:"weil du gern für andere da bist und dabei auch selbst über dich hinauswächst",
+    nervig:"körperliche und emotionale Belastung, wenig Kontrolle über den Tagesablauf",
+    nichtKlar:"Leute, denen Nähe zu fremden Menschen unangenehm ist" },
+  { id:"technik_digital", name:"Technischer oder digitaler Bereich (z. B. IT, Elektronik, technisches Handwerk)",
+    themes:["steigern","wirkung"],
+    passt:"weil du gern Probleme knackst und siehst, wie etwas am Ende funktioniert",
+    nervig:"lange Phasen allein am Problem, ohne dass schnell klar wird, ob du richtig liegst",
+    nichtKlar:"Leute, die viel Austausch mit anderen während der Arbeit brauchen" },
+  { id:"struktur_buero", name:"Verwaltung oder Büro mit festen, wiederkehrenden Abläufen",
+    themes:[],
+    passt:"auf den ersten Blick attraktiv wegen geregelter Arbeitszeiten und Sicherheit",
+    nervig:"wenig Abwechslung und dass sich nicht jeden Tag etwas sichtbar verändert",
+    nichtKlar:"Leute, die Ergebnisse sehen wollen oder viel mit Menschen zu tun haben wollen" }
+];
+
+function buildDirections(themeResults, mismatch){
+  // Punkte je Richtung: Summe der Abschnitts-Treffer ihrer zugeordneten Themen
+  var scored = DIRECTIONS.map(function(d){
+    var score = 0;
+    d.themes.forEach(function(t){
+      if(themeResults[t]) score += themeResults[t].sectionCount;
+    });
+    return { d:d, score:score };
+  });
+  scored.sort(function(a,b){ return b.score - a.score; });
+
+  var chosen = scored.filter(function(s){return s.score>0;}).slice(0,4);
+  if(chosen.length < 3){
+    // auffuellen, falls zu wenig Datenlage fuer 3 Richtungen
+    scored.forEach(function(s){
+      if(chosen.length<4 && chosen.indexOf(s)===-1 && chosen.filter(function(c){return c.d.id===s.d.id;}).length===0){
+        if(chosen.map(function(c){return c.d.id;}).indexOf(s.d.id)===-1) chosen.push(s);
+      }
+    });
+    chosen = chosen.slice(0,4);
+  }
+
+  var result = chosen.map(function(s){
+    // Zitat fuer die staerkste zugeordnete Theme suchen
+    var quote = null;
+    s.d.themes.forEach(function(t){
+      if(themeResults[t] && themeResults[t].quote && !quote) quote = shortQuote(themeResults[t].quote);
+    });
+    return {
+      name: s.d.name, passt: s.d.passt, nervig: s.d.nervig, nichtKlar: s.d.nichtKlar, quote: quote
+    };
+  });
+
+  // Pflicht: eine naheliegende, aber wahrscheinlich nicht passende Richtung
+  var berufswunschIdx = 20; // Frage "was antwortest du gerade..."
+  var berufswunsch = (state.answers[berufswunschIdx]||"").trim();
+  var probablyWrong;
+  if(mismatch && berufswunsch.length >= THIN_LIMIT){
+    probablyWrong = {
+      name: "Das, was du gerade als Berufswunsch nennst",
+      passt: null,
+      isNarrative: true,
+      text: "Du hast bei der Frage nach deinem Berufswunsch geschrieben: \"" + shortQuote(berufswunsch) +
+        "\". Das liegt nahe, weil es die Antwort ist, die du gerade gibst, wenn dich jemand danach fragt. " +
+        "Schau dir aber an, wovon du in den anderen Antworten am ausführlichsten erzählt hast: \"" +
+        (mismatch.earlyQuote||"") + "\". Das passt nicht unbedingt zu dem, was du als Wunsch nennst. " +
+        "Das heißt nicht, dass der Wunsch falsch ist – aber es lohnt sich zu prüfen, ob er wirklich aus eigenem " +
+        "Erleben kommt oder eher aus dem, was gerade naheliegt oder von dir erwartet wird."
+    };
+  } else {
+    var fallback = DIRECTIONS.filter(function(d){return d.id==="struktur_buero";})[0];
+    probablyWrong = {
+      name: fallback.name, isNarrative:false,
+      passt: "auf den ersten Blick naheliegend, weil es sicher und bekannt klingt",
+      nervig: fallback.nervig, nichtKlar: fallback.nichtKlar,
+      quote: null,
+      extra: "Laut deinen Antworten ist dir aber eher wichtig, dass sich etwas bewegt oder sichtbar verändert – das spricht gegen einen Alltag mit vor allem festen, wiederkehrenden Abläufen."
+    };
+  }
+
+  return { top: result, probablyWrong: probablyWrong };
+}
+
+/* ============================================================
+   STAERKEN UND KEHRSEITE
+   ============================================================ */
+var STRENGTH_TEXT = {
+  steigern: {
+    text: "Du gehst Dinge mit hohem eigenen Anspruch an und willst dich verbessern.",
+    kehrseite: "Die Kehrseite: das kann dazu führen, dass du dir selbst wenig durchgehen lässt und schnell unzufrieden bist, wenn etwas nicht so läuft, wie du es wolltest."
+  },
+  wirkung: {
+    text: "Du hast Freude daran, etwas zu gestalten und zu sehen, dass durch dich etwas entsteht oder sich verändert.",
+    kehrseite: "Die Kehrseite: das kann bedeuten, dass es dir schwerfällt, wenn du nur ausführen sollst, ohne mitreden oder mitgestalten zu dürfen."
+  },
+  zusammensein: {
+    text: "Dir ist wichtig, wer um dich herum ist und dass ihr euch aufeinander verlassen könnt.",
+    kehrseite: "Die Kehrseite: allein und ohne feste Bezugspersonen zu arbeiten könnte dich stärker belasten als andere Dinge im Job."
+  }
+};
+
+/* ============================================================
+   RENDER-FUNKTIONEN
+   ============================================================ */
+
+var app = document.getElementById("app");
+
+function render(){
+  if(state.screen==="start") return renderStart();
+  if(state.screen==="question") return renderQuestion();
+  if(state.screen==="rahmen") return renderRahmen();
+  if(state.screen==="selfcheck") return renderSelfCheck();
+  if(state.screen==="evaluation") return renderEvaluation();
+}
+
+function renderStart(){
+  app.innerHTML =
+    '<h1>Selbstcheck Berufsorientierung</h1>' +
+    '<div class="card">' +
+      '<p>Hier geht es um Fragen zum Nachdenken über dich. Am Ende bekommst du keine Note und kein festes Ergebnis, sondern eine Sammlung von Vermutungen.</p>' +
+      '<p>Das ist kein Test. Es gibt keine Punktzahl und keinen "Typ", der dabei herauskommt. Niemand außer dir bekommt das zu sehen.</p>' +
+      '<p>Rechne mit etwa 40 bis 60 Minuten. Du kannst jederzeit eine Pause machen und deinen Zwischenstand als Datei speichern.</p>' +
+      '<p><strong>Ein ernst gemeinter Hinweis:</strong> Kurze Antworten führen zu einer nutzlosen Auswertung. Ein Satz reicht nicht. Erzähl bei jeder Frage eine echte Situation – was passiert ist, was du gemacht hast, wie es sich angefühlt hat.</p>' +
+      '<p class="muted">Nichts wird verschickt und nichts gespeichert – außer der Datei, die du dir selbst herunterlädst.</p>' +
+      '<div class="btn-row">' +
+        '<button id="btnStart">Anfangen</button>' +
+        '<label class="file-input-label">Zwischenstand laden<input type="file" id="fileLoad" accept="application/json"></label>' +
+      '</div>' +
+    '</div>';
+  document.getElementById("btnStart").onclick = function(){
+    state.screen="question"; state.qIndex=0; render();
+  };
+  document.getElementById("fileLoad").onchange = handleLoadFile;
+}
+
+function renderProgress(current, total){
+  var pct = Math.round((current/total)*100);
+  return '<div class="progress-text">Frage ' + current + ' von ' + total + '</div>' +
+    '<div class="progress-bar-track"><div class="progress-bar-fill" style="width:' + pct + '%"></div></div>';
+}
+
+function renderQuestion(){
+  var i = state.qIndex;
+  var q = QUESTIONS[i];
+  var sec = SECTIONS[q.section];
+  var val = state.answers[i] || "";
+  app.innerHTML =
+    '<h2>' + esc(sec.heading) + '</h2>' +
+    renderProgress(i+1, TOTAL_Q) +
+    '<div class="card">' +
+      '<p style="font-size:1.15em;font-weight:600;">' + esc(q.text) + '</p>' +
+      '<textarea id="answerBox" placeholder="Erzähl die Situation so konkret wie möglich...">' + esc(val) + '</textarea>' +
+      '<div id="thinHint"></div>' +
+      '<div class="btn-row no-print">' +
+        (i>0 ? '<button class="secondary" id="btnBack">Zurück</button>' : '') +
+        '<button id="btnNext">Weiter</button>' +
+        '<button class="ghost" id="btnSkip">Frage überspringen</button>' +
+      '</div>' +
+      '<div class="btn-row no-print">' +
+        '<button class="secondary" id="btnSave">Zwischenstand speichern</button>' +
+      '</div>' +
+    '</div>';
+
+  var box = document.getElementById("answerBox");
+  var hint = document.getElementById("thinHint");
+  function updateHint(){
+    var len = box.value.trim().length;
+    if(len>0 && len<THIN_LIMIT){
+      hint.innerHTML = '<div class="hint">Das ist noch sehr kurz. Fällt dir eine konkrete Situation dazu ein?</div>';
+    } else {
+      hint.innerHTML = "";
+    }
+  }
+  updateHint();
+  box.oninput = updateHint;
+
+  document.getElementById("btnNext").onclick = function(){
+    state.answers[i] = box.value;
+    goToNextStep();
+  };
+  document.getElementById("btnSkip").onclick = function(){
+    state.answers[i] = "";
+    goToNextStep();
+  };
+  if(i>0){
+    document.getElementById("btnBack").onclick = function(){
+      state.answers[i] = box.value;
+      state.qIndex--; render();
+    };
+  }
+  document.getElementById("btnSave").onclick = function(){
+    state.answers[i] = box.value;
+    saveProgress();
+  };
+}
+
+function goToNextStep(){
+  if(state.qIndex < TOTAL_Q-1){
+    state.qIndex++;
+  } else {
+    state.screen = "rahmen";
+  }
+  render();
+}
+
+function renderRahmen(){
+  var r = state.rahmen;
+  app.innerHTML =
+    '<h2>Dein Rahmen</h2>' +
+    '<div class="card">' +
+      '<p class="muted">Ein paar Angaben, damit die Auswertung zu deiner Lage passt.</p>' +
+      '<label>Wohnort oder Region</label>' +
+      '<input type="text" id="f_ort" value="' + esc(r.ort) + '">' +
+
+      '<label>Wie weit würdest du täglich fahren?</label>' +
+      '<select id="f_fahrweg">' +
+        optionHtml(["", "bis 10 km", "bis 25 km", "bis 50 km", "weiter", "weiß nicht"], r.fahrweg) +
+      '</select>' +
+
+      '<label>Wie bist du unterwegs?</label>' +
+      '<select id="f_verkehr">' +
+        optionHtml(["", "zu Fuß und Bus/Bahn", "Fahrrad oder Roller", "Auto", "weiß noch nicht"], r.verkehrsmittel) +
+      '</select>' +
+
+      '<label>Schulabschluss (angestrebt oder vorhanden)</label>' +
+      '<input type="text" id="f_abschluss" value="' + esc(r.abschluss) + '">' +
+
+      '<label>Bis wann muss etwas entschieden sein?</label>' +
+      '<input type="text" id="f_zeit" value="' + esc(r.entscheidungszeit) + '">' +
+
+      '<label>Gibt es sonst etwas, das deine Auswahl einschränkt? Du musst hier nichts eintragen.</label>' +
+      '<input type="text" id="f_einschr" value="' + esc(r.einschraenkung) + '">' +
+
+      '<div class="btn-row no-print">' +
+        '<button class="secondary" id="btnBack">Zurück</button>' +
+        '<button id="btnNext">Weiter</button>' +
+      '</div>' +
+    '</div>';
+
+  document.getElementById("btnBack").onclick = function(){
+    saveRahmenFields();
+    state.screen="question"; state.qIndex = TOTAL_Q-1; render();
+  };
+  document.getElementById("btnNext").onclick = function(){
+    saveRahmenFields();
+    prepareSelfCheck();
+    state.screen="selfcheck"; render();
+  };
+}
+
+function optionHtml(options, selected){
+  return options.map(function(o){
+    var label = o===""?"Bitte wählen":o;
+    return '<option value="'+esc(o)+'"'+(o===selected?" selected":"")+'>'+esc(label)+'</option>';
+  }).join("");
+}
+
+function saveRahmenFields(){
+  state.rahmen.ort = document.getElementById("f_ort").value;
+  state.rahmen.fahrweg = document.getElementById("f_fahrweg").value;
+  state.rahmen.verkehrsmittel = document.getElementById("f_verkehr").value;
+  state.rahmen.abschluss = document.getElementById("f_abschluss").value;
+  state.rahmen.entscheidungszeit = document.getElementById("f_zeit").value;
+  state.rahmen.einschraenkung = document.getElementById("f_einschr").value;
+}
+
+function prepareSelfCheck(){
+  // 3-5 laengste Antworten auswaehlen
+  var withLen = state.answers.map(function(a,i){ return {i:i, len:(a||"").trim().length}; });
+  withLen = withLen.filter(function(x){ return x.len>0; });
+  withLen.sort(function(a,b){ return b.len-a.len; });
+  var picks = withLen.slice(0, Math.min(5, Math.max(3, Math.min(5,withLen.length))));
+  picks = withLen.slice(0, 5).filter(function(x,idx){ return idx<5; });
+  // mindestens 3, hoechstens 5
+  if(picks.length>5) picks = picks.slice(0,5);
+  state.selfCheckPrompt = picks.map(function(x){ return x.i; }).slice(0, Math.max(3, Math.min(5,picks.length)));
+  if(state.selfCheckPrompt.length>5) state.selfCheckPrompt = state.selfCheckPrompt.slice(0,5);
+}
+
+function renderSelfCheck(){
+  var items = state.selfCheckPrompt.map(function(i){
+    return '<li><span class="quote">"' + esc(shortQuote(state.answers[i].trim())) + '"</span>' +
+      '<div class="muted">zu: ' + esc(QUESTIONS[i].text) + '</div></li>';
+  }).join("");
+
+  app.innerHTML =
+    '<h2>Kurz zum Innehalten</h2>' +
+    '<div class="card">' +
+      '<p>Diese Sachen hast du am ausführlichsten beschrieben:</p>' +
+      '<ul>' + (items || '<li class="muted">Keine ausreichend langen Antworten gefunden.</li>') + '</ul>' +
+      '<p>Kommt das hin? Ist das wirklich das, was dir am meisten bedeutet?</p>' +
+      '<textarea id="selfBox" placeholder="Deine Einschätzung...">' + esc(state.selfCheckAnswer) + '</textarea>' +
+      '<div class="btn-row no-print">' +
+        '<button class="secondary" id="btnBack">Zurück</button>' +
+        '<button id="btnNext">Zur Auswertung</button>' +
+      '</div>' +
+    '</div>';
+
+  document.getElementById("btnBack").onclick = function(){
+    state.selfCheckAnswer = document.getElementById("selfBox").value;
+    state.screen="rahmen"; render();
+  };
+  document.getElementById("btnNext").onclick = function(){
+    state.selfCheckAnswer = document.getElementById("selfBox").value;
+    state.screen="evaluation"; render();
+  };
+}
+
+/* ============================================================
+   TEXTGENERATOR FUER NAECHSTE SCHRITTE
+   ============================================================ */
+function buildNextSteps(){
+  var steps = [
+    { text:"Frag in einem Betrieb oder einer Einrichtung aus den Richtungen oben nach einem kurzen Praktikum oder Schnuppertag.",
+      pruef:"Woran merkst du, dass diese Vermutung falsch war? Zum Beispiel: du zählst die Stunden bis Feierabend, statt neugierig zu bleiben." },
+    { text:"Rede mit jemandem, der in einem der Bereiche wirklich arbeitet – nicht nur darüber liest. Frag nach einem ganz normalen, eher durchschnittlichen Tag, nicht nach dem Hochglanz-Tag.",
+      pruef:"Woran merkst du, dass es nicht passt? Zum Beispiel: schon die Beschreibung eines normalen Tages schreckt dich ab." },
+    { text:"Probier eine kleine Version davon selbst aus – ein Wochenendprojekt, ein Ehrenamt, einen Verein oder eine Aufgabe zu Hause, die in die Richtung geht.",
+      pruef:"Woran merkst du, dass die Vermutung falsch war? Zum Beispiel: es fühlt sich nach Pflicht an, nicht nach eigenem Antrieb." },
+    { text:"Geh zur Berufsberatung der Agentur für Arbeit und leg ihnen deine Richtungen vor, statt bei null anzufangen.",
+      pruef:"Woran merkst du, dass eine Richtung sich erledigt? Zum Beispiel: dort stellt sich heraus, dass Fahrweg oder Abschluss nicht passen." },
+    { text:"Sprich mit der Person aus deiner ausführlichsten Antwort im Selbstcheck genau über diese Situation – frag sie, ob sie das ähnlich sieht wie du.",
+      pruef:"Woran würdest du merken, dass deine eigene Einschätzung danebenlag?" }
+  ];
+  if(state.rahmen.fahrweg==="bis 10 km" || state.rahmen.verkehrsmittel==="weiß noch nicht"){
+    steps.push({ text:"Schau dir konkret an, wie du die Orte aus deinen Richtungen mit deinem Verkehrsmittel überhaupt erreichen würdest – probier die Strecke einmal testweise.",
+      pruef:"Woran merkst du, dass eine Richtung an der Erreichbarkeit scheitert?" });
+  }
+  return steps.slice(0,6);
+}
+
+/* ============================================================
+   EVALUATION
+   ============================================================ */
+function renderEvaluation(){
+  var skipped = countSkipped();
+  var thin = countThin();
+  var safetyFlag = detectSafetyFlag();
+
+  // Regel: bei zu duenner Datenlage keine normale Auswertung ausgeben.
+  if(skipped > 8 || thin > 12){
+    app.innerHTML =
+      '<h2>Dazu lässt sich noch nichts Brauchbares sagen</h2>' +
+      '<div class="card">' +
+        '<p>Du hast ' + skipped + ' Frage(n) übersprungen und ' + thin + ' Antwort(en) sehr kurz gelassen. ' +
+        'Aus so wenig lässt sich keine ehrliche Auswertung machen – eine schwache Auswertung mit vorsichtigeren Worten würde dir nur etwas vorgaukeln.</p>' +
+        '<p>Am besten nimmst du dir noch einmal Zeit und gehst die Fragen durch, bei denen wenig steht. Erzähl echte Situationen, keine Stichworte.</p>' +
+        '<div class="btn-row no-print">' +
+          '<button id="btnBackFix">Antworten ergänzen</button>' +
+          '<button class="secondary" id="btnRestart">Alles löschen und neu anfangen</button>' +
+        '</div>' +
+      '</div>';
+    document.getElementById("btnBackFix").onclick = function(){
+      state.screen="question"; state.qIndex=0; render();
+    };
+    document.getElementById("btnRestart").onclick = function(){
+      if(confirm("Wirklich alles löschen und neu anfangen?")) resetAll();
+    };
+    return;
+  }
+
+  var analysis = buildObservations();
+  var dirData = buildDirections(analysis.themeResults, analysis.mismatch);
+
+  var html = "";
+
+  if(safetyFlag){
+    html += '<div class="safety-box">' +
+      '<h3>Kurz dazwischen</h3>' +
+      '<p>In dem, was du geschrieben hast, stehen Dinge, die ernst klingen. Das wird hier nicht bewertet oder eingeordnet.</p>' +
+      '<p>Es lohnt sich, damit nicht allein zu bleiben und mit einem Menschen darüber zu reden.</p>' +
+      '<p><strong>Nummer gegen Kummer:</strong> 116 111 (kostenlos und anonym)<br>' +
+      '<strong>Telefonseelsorge:</strong> 0800 111 0 111</p>' +
+    '</div>';
+  }
+
+  html += '<h1 class="no-print">Deine Auswertung</h1>';
+
+  // 1+2: Beobachtungen mit Sicherheitsangabe
+  html += '<div class="card"><h2>Was ich aus deinen Antworten lese</h2>';
+  if(analysis.observations.length===0){
+    html += '<p class="muted">Aus den Antworten lässt sich keine Beobachtung mit einem echten Zitat belegen.</p>';
+  } else {
+    analysis.observations.slice(0,6).forEach(function(o){
+      html += '<div class="obs"><p>' + esc(o.text) + '</p>' +
+        '<p class="quote">"' + esc(o.quote) + '"</p>' +
+        '<p class="conf">' + esc(o.confidence) + '</p></div>';
+    });
+  }
+  if(analysis.mismatch){
+    html += '<div class="obs" style="border-left-color:var(--danger-border);">' +
+      '<p><strong>Das fällt besonders auf:</strong> Bei der Frage nach deinem Ziel klingt etwas anderes durch als in dem, wovon du sonst am ausführlichsten erzählst.</p>' +
+      '<p class="quote">"' + esc(analysis.mismatch.earlyQuote) + '"</p>' +
+      (analysis.mismatch.lateQuote ? '<p class="quote">"' + esc(analysis.mismatch.lateQuote) + '"</p>' : '') +
+      '<p class="conf">Das ist nur eine Vermutung – aber wert, sie dir genauer anzuschauen.</p></div>';
+  }
+  html += '</div>';
+
+  // 3: Arbeitsbedingungen (nicht Berufe)
+  html += '<div class="card"><h2>Was gut zu dir passen könnte / was dich vermutlich fertigmachen würde</h2>';
+  var condPass = [], condAvoid = [];
+  if(analysis.themeResults.zusammensein.sectionCount>0){ condPass.push("feste Leute um dich herum, mit denen du regelmäßig zu tun hast"); condAvoid.push("allein und ohne fixe Ansprechpartner arbeiten"); }
+  if(analysis.themeResults.wirkung.sectionCount>0){ condPass.push("jeden Tag oder jede Woche ein sichtbares Ergebnis"); condAvoid.push("nur Zuarbeit leisten, ohne dass etwas Eigenes sichtbar wird"); }
+  if(analysis.themeResults.steigern.sectionCount>0){ condPass.push("klare Ziele, an denen du dich messen kannst"); condAvoid.push("Aufgaben ohne jede Rückmeldung, ob du gut bist"); }
+  if(condPass.length===0){ condPass.push("Bedingungen, bei denen du merkst, wie du vorankommst"); }
+  if(condAvoid.length===0){ condAvoid.push("Bedingungen ohne jede Rückmeldung oder Orientierung"); }
+  html += '<p><strong>Könnte passen:</strong> ' + esc(condPass.join("; ")) + '.</p>';
+  html += '<p><strong>Würde dich vermutlich fertigmachen:</strong> ' + esc(condAvoid.join("; ")) + '.</p>';
+  html += '</div>';
+
+  // 4: Staerken und Kehrseite
+  html += '<div class="card"><h2>Stärken und ihre Kehrseite</h2>';
+  var anyStrength = false;
+  Object.keys(STRENGTH_TEXT).forEach(function(key){
+    if(analysis.themeResults[key] && analysis.themeResults[key].sectionCount>0){
+      anyStrength = true;
+      html += '<p>' + esc(STRENGTH_TEXT[key].text) + ' ' + esc(STRENGTH_TEXT[key].kehrseite) + '</p>';
+    }
+  });
+  if(!anyStrength) html += '<p class="muted">Dazu lässt sich aus den Antworten nichts Belegbares sagen.</p>';
+  html += '</div>';
+
+  // 5: Richtungen zum Angucken
+  html += '<div class="card"><h2>Richtungen zum Angucken</h2><p class="muted">Das sind Richtungen zum Angucken, keine Empfehlung.</p>';
+  dirData.top.forEach(function(d){
+    html += '<div class="direction"><h4>' + esc(d.name) + '</h4>' +
+      '<p><strong>Warum das passen könnte:</strong> ' + esc(d.passt) + (d.quote ? ' – dazu passt: "' + esc(d.quote) + '"' : '') + '.</p>' +
+      '<p><strong>Was daran nervig sein kann:</strong> ' + esc(d.nervig) + '.</p>' +
+      '<p><strong>Wer damit typischerweise nicht klarkommt:</strong> ' + esc(d.nichtKlar) + '.</p></div>';
+  });
+  html += '<div class="direction" style="border-color:var(--danger-border);"><h4>Naheliegend, aber wahrscheinlich nicht die beste Wahl</h4>';
+  if(dirData.probablyWrong.isNarrative){
+    html += '<p>' + esc(dirData.probablyWrong.text) + '</p>';
+  } else {
+    html += '<p><strong>' + esc(dirData.probablyWrong.name) + '</strong> – ' + esc(dirData.probablyWrong.passt) + '.</p>' +
+      '<p>' + esc(dirData.probablyWrong.extra) + '</p>' +
+      '<p><strong>Was daran nervig sein kann:</strong> ' + esc(dirData.probablyWrong.nervig) + '.</p>';
+  }
+  html += '</div></div>';
+
+  // 6: Naechste Schritte
+  html += '<div class="card"><h2>Was du in den nächsten drei Monaten machen kannst</h2><ul>';
+  buildNextSteps().forEach(function(s){
+    html += '<li>' + esc(s.text) + '<br><span class="muted">' + esc(s.pruef) + '</span></li>';
+  });
+  html += '</ul></div>';
+
+  // 7: Was die Auswertung nicht weiss
+  html += '<div class="card"><h2>Was diese Auswertung nicht weiß</h2>';
+  html += '<p>Du hast ' + skipped + ' von ' + TOTAL_Q + ' Fragen übersprungen und ' + thin + ' Antworten sehr kurz gelassen. ';
+  if(skipped>0 || thin>0){
+    html += 'Das schränkt ein, wie verlässlich diese Beobachtungen sind.</p>';
+  } else {
+    html += 'Damit hast du eine solide Grundlage geliefert – trotzdem bleibt es eine Auswertung aus Textmustern, kein Blick in dich hinein.</p>';
+  }
+  html += '<p>Man könnte deine Antworten auch anders lesen: Vieles davon kann auch einfach mit deinem Alter, deiner aktuellen Lebenssituation oder der Tagesform beim Ausfüllen zu tun haben – nicht zwangsläufig mit einer festen Vorliebe.</p>';
+  html += '</div>';
+
+  // 8: Eigene Einschaetzung
+  html += '<div class="card"><h2>Was du selbst gesagt hast</h2>';
+  if(state.selfCheckAnswer && state.selfCheckAnswer.trim().length>0){
+    html += '<p class="quote">"' + esc(state.selfCheckAnswer.trim()) + '"</p>';
+  } else {
+    html += '<p class="muted">Dazu hast du nichts eingetragen.</p>';
+  }
+  html += '<p>Das zählt mehr als alles andere auf dieser Seite.</p></div>';
+
+  // 9: Zum Schluss
+  html += '<div class="card"><h2>Zum Schluss</h2>' +
+    '<p>Mit 15 bis 18 ändert sich noch vieles. Diese Auswertung ist eine Momentaufnahme, kein Urteil.</p>' +
+    '<p>Verbindliche Auskünfte zu Ausbildungsplätzen bekommst du bei der Berufsberatung der ' +
+    '<a href="https://www.arbeitsagentur.de" target="_blank" rel="noopener">Agentur für Arbeit</a>.</p>' +
+    '<p>Es lohnt sich, diese Auswertung mit jemandem zu besprechen, der dich kennt.</p></div>';
+
+  // Aktionsknoepfe
+  html += '<div class="btn-row no-print">' +
+    '<button id="btnPrint">Als PDF speichern</button>' +
+    '<button class="secondary" id="btnTxt">Auswertung als Textdatei herunterladen</button>' +
+    '<button class="secondary" id="btnSave2">Zwischenstand speichern</button>' +
+    '<button class="ghost" id="btnRestart2">Alles löschen und neu anfangen</button>' +
+  '</div>';
+
+  app.innerHTML = html;
+
+  document.getElementById("btnPrint").onclick = function(){ window.print(); };
+  document.getElementById("btnTxt").onclick = function(){ downloadEvaluationText(analysis, dirData, skipped, thin, safetyFlag); };
+  document.getElementById("btnSave2").onclick = saveProgress;
+  document.getElementById("btnRestart2").onclick = function(){
+    if(confirm("Wirklich alles löschen und neu anfangen?")) resetAll();
+  };
+}
+
+function downloadEvaluationText(analysis, dirData, skipped, thin, safetyFlag){
+  var lines = [];
+  lines.push("SELBSTCHECK BERUFSORIENTIERUNG - AUSWERTUNG");
+  lines.push("");
+  if(safetyFlag){
+    lines.push("Hinweis: In deinen Antworten stehen Dinge, die ernst klingen.");
+    lines.push("Nummer gegen Kummer: 116 111 | Telefonseelsorge: 0800 111 0 111");
+    lines.push("");
+  }
+  lines.push("WAS ICH AUS DEINEN ANTWORTEN LESE");
+  analysis.observations.forEach(function(o){
+    lines.push("- " + o.text);
+    lines.push('  Zitat: "' + o.quote + '"');
+    lines.push("  " + o.confidence);
+  });
+  lines.push("");
+  lines.push("RICHTUNGEN ZUM ANGUCKEN");
+  dirData.top.forEach(function(d){
+    lines.push("- " + d.name);
+    lines.push("  Warum: " + d.passt);
+    lines.push("  Nervig: " + d.nervig);
+  });
+  lines.push("");
+  lines.push("WAS DU SELBST GESAGT HAST");
+  lines.push(state.selfCheckAnswer || "(nichts eingetragen)");
+  lines.push("");
+  lines.push("Übersprungene Fragen: " + skipped + " von " + TOTAL_Q);
+  lines.push("Sehr kurze Antworten: " + thin);
+
+  var blob = new Blob([lines.join("\n")], {type:"text/plain;charset=utf-8"});
+  triggerDownload(blob, "auswertung-berufsorientierung.txt");
+}
+
+/* ============================================================
+   SPEICHERN / LADEN
+   ============================================================ */
+// Wenn die Seite in der Claude-Artifact-Vorschau laeuft, sind normale
+// Downloads (a[download]) blockiert. Dort laeuft der Download stattdessen
+// ueber die downloads-Capability des Viewers. Ausserhalb (lokale Datei,
+// normaler Browser) greift ganz normal der Blob+<a>-Weg.
+async function triggerDownload(blob, filename){
+  if(window.claude && typeof window.claude.use === "function"){
+    try{
+      var downloads = await window.claude.use("downloads");
+      if(downloads){
+        try{
+          await downloads.save({ filename: filename, data: blob });
+          return;
+        }catch(err){
+          alert("Datei konnte nicht gespeichert werden: " + (err && err.message ? err.message : "unbekannter Fehler"));
+          return;
+        }
+      }
+    }catch(err){ /* Capability nicht verfuegbar, normaler Weg unten */ }
+  }
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+}
+
+function saveProgress(){
+  var data = {
+    version:1,
+    screen: state.screen,
+    qIndex: state.qIndex,
+    answers: state.answers,
+    rahmen: state.rahmen,
+    selfCheckPrompt: state.selfCheckPrompt,
+    selfCheckAnswer: state.selfCheckAnswer
+  };
+  var blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
+  triggerDownload(blob, "zwischenstand-berufsorientierung.json");
+}
+
+function handleLoadFile(ev){
+  var file = ev.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      var data = JSON.parse(e.target.result);
+      if(!data || !Array.isArray(data.answers) || data.answers.length!==TOTAL_Q){
+        alert("Diese Datei passt nicht zu diesem Selbstcheck.");
+        return;
+      }
+      state.answers = data.answers;
+      state.rahmen = data.rahmen || state.rahmen;
+      state.selfCheckPrompt = data.selfCheckPrompt || [];
+      state.selfCheckAnswer = data.selfCheckAnswer || "";
+      state.qIndex = typeof data.qIndex==="number" ? data.qIndex : 0;
+      state.screen = data.screen || "question";
+      render();
+    } catch(err){
+      alert("Diese Datei konnte nicht gelesen werden.");
+    }
+  };
+  reader.readAsText(file);
+}
+
+/* ============================================================
+   START
+   ============================================================ */
+render();
+
+})();
+</script>
+</body>
+</html>
